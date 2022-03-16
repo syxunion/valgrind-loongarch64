@@ -412,6 +412,37 @@ ULong loongarch64_calculate_bitrev_d ( ULong src )
    return bitrev(src, 0, 64);
 }
 
+static ULong crc32 ( ULong old, ULong msg, ULong width, ULong poly )
+{
+   int i;
+   ULong new;
+   if (width == 8)
+      msg &= 0xff;
+   else if (width == 16)
+      msg &= 0xffff;
+   else if (width == 32)
+      msg &= 0xffffffff;
+   new = (old & 0xffffffff) ^ msg;
+   for (i = 0; i < width; i++) {
+      if (new & 1)
+         new = (new >> 1) ^ poly;
+      else
+         new >>= 1;
+   }
+   return new;
+}
+
+ULong loongarch64_calculate_crc ( ULong dst, ULong src, ULong len )
+{
+   ULong res = crc32(dst, src, len, 0xedb88320);
+   return (ULong)(Long)(Int)res;
+}
+
+ULong loongarch64_calculate_crcc ( ULong dst, ULong src, ULong len )
+{
+   ULong res = crc32(dst, src, len, 0x82f63b78);
+   return (ULong)(Long)(Int)res;
+}
 
 /*---------------------------------------------------------------*/
 /*--- end                         guest_loongarch64_helpers.c ---*/
