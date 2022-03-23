@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Copyright (C) 2007-2018 Free Software Foundation, Inc.
+
+     Copying and distribution of this file, with or without modification,
+     are permitted in any medium without royalty provided the copyright
+     notice and this notice are preserved.  -->
+
+<!DOCTYPE feature SYSTEM "gdb-target.dtd">
+<target>
+  <architecture>loongarch</architecture>
+  <xi:include href="loongarch-base64.xml"/>
+  <xi:include href="loongarch-fpu64.xml"/>
+
+  <feature name="org.gnu.gdb.loongarch.base">
+    <reg name="restart" bitsize="64" group="system"/>
+  </feature>
+</target>
