@@ -4374,6 +4374,12 @@ static Bool gen_fadd_s ( DisResult* dres, UInt insn,
 
    DIP("fadd.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FADD_S, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, triop(Iop_AddF32, rm, getFReg32(fj), getFReg32(fk)));
@@ -4390,6 +4396,12 @@ static Bool gen_fadd_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fadd.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FADD_D, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
@@ -4408,6 +4420,12 @@ static Bool gen_fsub_s ( DisResult* dres, UInt insn,
 
    DIP("fsub.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FSUB_S, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, triop(Iop_SubF32, rm, getFReg32(fj), getFReg32(fk)));
@@ -4424,6 +4442,12 @@ static Bool gen_fsub_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fsub.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FSUB_D, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
@@ -4442,6 +4466,12 @@ static Bool gen_fmul_s ( DisResult* dres, UInt insn,
 
    DIP("fmul.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMUL_S, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, triop(Iop_MulF32, rm, getFReg32(fj), getFReg32(fk)));
@@ -4458,6 +4488,12 @@ static Bool gen_fmul_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fmul.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FMUL_D, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
@@ -4476,6 +4512,12 @@ static Bool gen_fdiv_s ( DisResult* dres, UInt insn,
 
    DIP("fdiv.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FDIV_S, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, triop(Iop_DivF32, rm, getFReg32(fj), getFReg32(fk)));
@@ -4492,6 +4534,12 @@ static Bool gen_fdiv_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fdiv.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FDIV_D, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
@@ -4511,6 +4559,12 @@ static Bool gen_fmadd_s ( DisResult* dres, UInt insn,
 
    DIP("fmadd.s %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                    nameFReg(fk), nameFReg(fa));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FMADD_S, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
@@ -4532,6 +4586,12 @@ static Bool gen_fmadd_d ( DisResult* dres, UInt insn,
    DIP("fmadd.d %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                    nameFReg(fk), nameFReg(fa));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMADD_D, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
    putFReg64(fd, qop(Iop_MAddF64, rm, getFReg64(fj),
@@ -4551,6 +4611,12 @@ static Bool gen_fmsub_s ( DisResult* dres, UInt insn,
 
    DIP("fmsub.s %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                    nameFReg(fk), nameFReg(fa));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FMSUB_S, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
@@ -4572,6 +4638,12 @@ static Bool gen_fmsub_d ( DisResult* dres, UInt insn,
    DIP("fmsub.d %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                    nameFReg(fk), nameFReg(fa));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMSUB_D, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
    putFReg64(fd, qop(Iop_MSubF64, rm, getFReg64(fj),
@@ -4591,6 +4663,12 @@ static Bool gen_fnmadd_s ( DisResult* dres, UInt insn,
 
    DIP("fnmadd.s %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                     nameFReg(fk), nameFReg(fa));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FNMADD_S, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
@@ -4613,6 +4691,12 @@ static Bool gen_fnmadd_d ( DisResult* dres, UInt insn,
    DIP("fnmadd.d %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                     nameFReg(fk), nameFReg(fa));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FNMADD_D, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
    IRExpr* madd = qop(Iop_MAddF64, rm, getFReg64(fj),
@@ -4633,6 +4717,12 @@ static Bool gen_fnmsub_s ( DisResult* dres, UInt insn,
 
    DIP("fnmsub.s %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                     nameFReg(fk), nameFReg(fa));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FNMSUB_S, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
@@ -4655,6 +4745,12 @@ static Bool gen_fnmsub_d ( DisResult* dres, UInt insn,
    DIP("fnmsub.d %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                     nameFReg(fk), nameFReg(fa));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FNMSUB_D, 3, fj, fk, fa);
    IRExpr* rm = get_rounding_mode();
    IRExpr* msub = qop(Iop_MSubF64, rm, getFReg64(fj),
@@ -4674,6 +4770,12 @@ static Bool gen_fmax_s ( DisResult* dres, UInt insn,
 
    DIP("fmax.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMAX_S, 2, fj, fk, 0);
    putFReg32(fd, binop(Iop_MaxNumF32, getFReg32(fj), getFReg32(fk)));
 
@@ -4689,6 +4791,12 @@ static Bool gen_fmax_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fmax.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FMAX_D, 2, fj, fk, 0);
    putFReg64(fd, binop(Iop_MaxNumF64, getFReg64(fj), getFReg64(fk)));
@@ -4706,6 +4814,12 @@ static Bool gen_fmin_s ( DisResult* dres, UInt insn,
 
    DIP("fmin.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMIN_S, 2, fj, fk, 0);
    putFReg32(fd, binop(Iop_MinNumF32, getFReg32(fj), getFReg32(fk)));
 
@@ -4721,6 +4835,12 @@ static Bool gen_fmin_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fmin.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FMIN_D, 2, fj, fk, 0);
    putFReg64(fd, binop(Iop_MinNumF64, getFReg64(fj), getFReg64(fk)));
@@ -4738,6 +4858,12 @@ static Bool gen_fmaxa_s ( DisResult* dres, UInt insn,
 
    DIP("fmaxa.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMAXA_S, 2, fj, fk, 0);
    putFReg32(fd, binop(Iop_MaxNumAbsF32, getFReg32(fj), getFReg32(fk)));
 
@@ -4753,6 +4879,12 @@ static Bool gen_fmaxa_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fmaxa.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FMAXA_D, 2, fj, fk, 0);
    putFReg64(fd, binop(Iop_MaxNumAbsF64, getFReg64(fj), getFReg64(fk)));
@@ -4770,6 +4902,12 @@ static Bool gen_fmina_s ( DisResult* dres, UInt insn,
 
    DIP("fmina.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMINA_S, 2, fj, fk, 0);
    putFReg32(fd, binop(Iop_MinNumAbsF32, getFReg32(fj), getFReg32(fk)));
 
@@ -4786,6 +4924,12 @@ static Bool gen_fmina_d ( DisResult* dres, UInt insn,
 
    DIP("fmina.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FMINA_D, 2, fj, fk, 0);
    putFReg64(fd, binop(Iop_MinNumAbsF64, getFReg64(fj), getFReg64(fk)));
 
@@ -4800,6 +4944,12 @@ static Bool gen_fabs_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fabs.s %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FABS_S, 1, fj, 0, 0);
    putFReg32(fd, unop(Iop_AbsF32, getFReg32(fj)));
@@ -4816,6 +4966,12 @@ static Bool gen_fabs_d ( DisResult* dres, UInt insn,
 
    DIP("fabs.d %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FABS_D, 1, fj, 0, 0);
    putFReg64(fd, unop(Iop_AbsF64, getFReg64(fj)));
 
@@ -4830,6 +4986,12 @@ static Bool gen_fneg_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fneg.s %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FNEG_S, 1, fj, 0, 0);
    putFReg32(fd, unop(Iop_NegF32, getFReg32(fj)));
@@ -4846,6 +5008,12 @@ static Bool gen_fneg_d ( DisResult* dres, UInt insn,
 
    DIP("fneg.d %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FNEG_D, 1, fj, 0, 0);
    putFReg64(fd, unop(Iop_NegF64, getFReg64(fj)));
 
@@ -4860,6 +5028,12 @@ static Bool gen_fsqrt_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fsqrt.s %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FSQRT_S, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
@@ -4877,6 +5051,12 @@ static Bool gen_fsqrt_d ( DisResult* dres, UInt insn,
 
    DIP("fsqrt.d %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FSQRT_D, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg64(fd, binop(Iop_SqrtF64, rm, getFReg64(fj)));
@@ -4892,6 +5072,12 @@ static Bool gen_frecip_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("frecip.s %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FRECIP_S, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
@@ -4909,6 +5095,12 @@ static Bool gen_frecip_d ( DisResult* dres, UInt insn,
 
    DIP("frecip.d %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FRECIP_D, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg64(fd, triop(Iop_DivF64, rm, mkF64i(1), getFReg64(fj)));
@@ -4925,6 +5117,12 @@ static Bool gen_frsqrt_s ( DisResult* dres, UInt insn,
 
    DIP("frsqrt.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FRSQRT_S, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, binop(Iop_RSqrtF32, rm, getFReg32(fj)));
@@ -4940,6 +5138,12 @@ static Bool gen_frsqrt_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("frsqrt.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FRSQRT_D, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
@@ -4958,6 +5162,12 @@ static Bool gen_fscaleb_s ( DisResult* dres, UInt insn,
 
    DIP("fscaleb.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FSCALEB_S, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, triop(Iop_ScaleBF32, rm, getFReg32(fj), getFReg32(fk)));
@@ -4975,6 +5185,12 @@ static Bool gen_fscaleb_d ( DisResult* dres, UInt insn,
 
    DIP("fscaleb.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FSCALEB_D, 2, fj, fk, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg64(fd, triop(Iop_ScaleBF64, rm, getFReg64(fj), getFReg64(fk)));
@@ -4990,6 +5206,12 @@ static Bool gen_flogb_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("flogb.s %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FLOGB_S, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
@@ -5007,6 +5229,12 @@ static Bool gen_flogb_d ( DisResult* dres, UInt insn,
 
    DIP("flogb.d %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FLOGB_D, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg64(fd, binop(Iop_LogBF64, rm, getFReg64(fj)));
@@ -5023,6 +5251,12 @@ static Bool gen_fcopysign_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fcopysign.s %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* i1 = unop(Iop_ReinterpF32asI32, getFReg32(fj));
    IRExpr* shl1 = binop(Iop_Shl32, i1, mkU8(1));
@@ -5046,6 +5280,12 @@ static Bool gen_fcopysign_d ( DisResult* dres, UInt insn,
 
    DIP("fcopysign.d %s, %s, %s\n", nameFReg(fd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* i1 = unop(Iop_ReinterpF64asI64, getFReg64(fj));
    IRExpr* shl1 = binop(Iop_Shl64, i1, mkU8(1));
    IRExpr* shr1 = binop(Iop_Shr64, shl1, mkU8(1));
@@ -5067,6 +5307,12 @@ static Bool gen_fclass_s ( DisResult* dres, UInt insn,
 
    DIP("fclass.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr** arg = mkIRExprVec_1(unop(Iop_ReinterpF64asI64, getFReg64(fj)));
    IRExpr* call = mkIRExprCCall(Ity_I64, 1/*regparms*/,
                                 "loongarch64_calculate_fclass_s",
@@ -5085,6 +5331,12 @@ static Bool gen_fclass_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fclass.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr** arg = mkIRExprVec_1(unop(Iop_ReinterpF64asI64, getFReg64(fj)));
    IRExpr* call = mkIRExprCCall(Ity_I64, 1/*regparms*/,
@@ -5201,6 +5453,12 @@ static Bool gen_fcmp_caf_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.caf.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CAF_S, cd, fj, fk, False);
 }
 
@@ -5213,6 +5471,12 @@ static Bool gen_fcmp_caf_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.caf.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CAF_D, cd, fj, fk, True);
 }
@@ -5227,6 +5491,12 @@ static Bool gen_fcmp_saf_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.saf.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SAF_S, cd, fj, fk, False);
 }
 
@@ -5239,6 +5509,12 @@ static Bool gen_fcmp_saf_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.saf.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SAF_D, cd, fj, fk, True);
 }
@@ -5253,6 +5529,12 @@ static Bool gen_fcmp_clt_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.clt.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CLT_S, cd, fj, fk, False);
 }
 
@@ -5265,6 +5547,12 @@ static Bool gen_fcmp_clt_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.clt.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CLT_D, cd, fj, fk, True);
 }
@@ -5279,6 +5567,12 @@ static Bool gen_fcmp_slt_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.slt.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SLT_S, cd, fj, fk, False);
 }
 
@@ -5291,6 +5585,12 @@ static Bool gen_fcmp_slt_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.slt.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SLT_D, cd, fj, fk, True);
 }
@@ -5305,6 +5605,12 @@ static Bool gen_fcmp_ceq_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.ceq.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CEQ_S, cd, fj, fk, False);
 }
 
@@ -5317,6 +5623,12 @@ static Bool gen_fcmp_ceq_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.ceq.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CEQ_D, cd, fj, fk, True);
 }
@@ -5331,6 +5643,12 @@ static Bool gen_fcmp_seq_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.seq.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SEQ_S, cd, fj, fk, False);
 }
 
@@ -5343,6 +5661,12 @@ static Bool gen_fcmp_seq_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.seq.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SEQ_D, cd, fj, fk, True);
 }
@@ -5357,6 +5681,12 @@ static Bool gen_fcmp_cle_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cle.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CLE_S, cd, fj, fk, False);
 }
 
@@ -5369,6 +5699,12 @@ static Bool gen_fcmp_cle_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cle.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CLE_D, cd, fj, fk, True);
 }
@@ -5383,6 +5719,12 @@ static Bool gen_fcmp_sle_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sle.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SLE_S, cd, fj, fk, False);
 }
 
@@ -5395,6 +5737,12 @@ static Bool gen_fcmp_sle_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sle.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SLE_D, cd, fj, fk, True);
 }
@@ -5409,6 +5757,12 @@ static Bool gen_fcmp_cun_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cun.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CUN_S, cd, fj, fk, False);
 }
 
@@ -5421,6 +5775,12 @@ static Bool gen_fcmp_cun_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cun.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CUN_D, cd, fj, fk, True);
 }
@@ -5435,6 +5795,12 @@ static Bool gen_fcmp_sun_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sun.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SUN_S, cd, fj, fk, False);
 }
 
@@ -5447,6 +5813,12 @@ static Bool gen_fcmp_sun_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sun.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SUN_D, cd, fj, fk, True);
 }
@@ -5461,6 +5833,12 @@ static Bool gen_fcmp_cult_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cult.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CULT_S, cd, fj, fk, False);
 }
 
@@ -5473,6 +5851,12 @@ static Bool gen_fcmp_cult_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cult.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CULT_D, cd, fj, fk, True);
 }
@@ -5487,6 +5871,12 @@ static Bool gen_fcmp_sult_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sult.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SULT_S, cd, fj, fk, False);
 }
 
@@ -5499,6 +5889,12 @@ static Bool gen_fcmp_sult_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sult.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SULT_D, cd, fj, fk, True);
 }
@@ -5513,6 +5909,12 @@ static Bool gen_fcmp_cueq_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cueq.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CUEQ_S, cd, fj, fk, False);
 }
 
@@ -5525,6 +5927,12 @@ static Bool gen_fcmp_cueq_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cueq.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CUEQ_D, cd, fj, fk, True);
 }
@@ -5539,6 +5947,12 @@ static Bool gen_fcmp_sueq_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sueq.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SUEQ_S, cd, fj, fk, False);
 }
 
@@ -5551,6 +5965,12 @@ static Bool gen_fcmp_sueq_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sueq.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SUEQ_D, cd, fj, fk, True);
 }
@@ -5565,6 +5985,12 @@ static Bool gen_fcmp_cule_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cule.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CULE_S, cd, fj, fk, False);
 }
 
@@ -5577,6 +6003,12 @@ static Bool gen_fcmp_cule_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cule.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CULE_D, cd, fj, fk, True);
 }
@@ -5591,6 +6023,12 @@ static Bool gen_fcmp_sule_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sule.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SULE_S, cd, fj, fk, False);
 }
 
@@ -5603,6 +6041,12 @@ static Bool gen_fcmp_sule_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sule.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SULE_D, cd, fj, fk, True);
 }
@@ -5617,6 +6061,12 @@ static Bool gen_fcmp_cne_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cne.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CNE_S, cd, fj, fk, False);
 }
 
@@ -5629,6 +6079,12 @@ static Bool gen_fcmp_cne_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cne.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CNE_D, cd, fj, fk, True);
 }
@@ -5643,6 +6099,12 @@ static Bool gen_fcmp_sne_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sne.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SNE_S, cd, fj, fk, False);
 }
 
@@ -5655,6 +6117,12 @@ static Bool gen_fcmp_sne_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sne.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SNE_D, cd, fj, fk, True);
 }
@@ -5669,6 +6137,12 @@ static Bool gen_fcmp_cor_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cor.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_COR_S, cd, fj, fk, False);
 }
 
@@ -5681,6 +6155,12 @@ static Bool gen_fcmp_cor_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cor.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_COR_D, cd, fj, fk, True);
 }
@@ -5695,6 +6175,12 @@ static Bool gen_fcmp_sor_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sor.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SOR_S, cd, fj, fk, False);
 }
 
@@ -5707,6 +6193,12 @@ static Bool gen_fcmp_sor_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sor.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SOR_D, cd, fj, fk, True);
 }
@@ -5721,6 +6213,12 @@ static Bool gen_fcmp_cune_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.cune.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_CUNE_S, cd, fj, fk, False);
 }
 
@@ -5733,6 +6231,12 @@ static Bool gen_fcmp_cune_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.cune.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_CUNE_D, cd, fj, fk, True);
 }
@@ -5747,6 +6251,12 @@ static Bool gen_fcmp_sune_s ( DisResult* dres, UInt insn,
 
    DIP("fcmp.sune.s %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_fcmp_cond_helper(FCMP_SUNE_S, cd, fj, fk, False);
 }
 
@@ -5759,6 +6269,12 @@ static Bool gen_fcmp_sune_d ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("fcmp.sune.d %s, %s, %s\n", nameFCC(cd), nameFReg(fj), nameFReg(fk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_fcmp_cond_helper(FCMP_SUNE_D, cd, fj, fk, True);
 }
@@ -5907,6 +6423,12 @@ static Bool gen_fcvt_s_d ( DisResult* dres, UInt insn,
 
    DIP("fcvt.s.d %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FCVT_S_D, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, binop(Iop_F64toF32, rm, getFReg64(fj)));
@@ -5923,6 +6445,12 @@ static Bool gen_fcvt_d_s ( DisResult* dres, UInt insn,
 
    DIP("fcvt.d.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FCVT_D_S, 1, fj, 0, 0);
    putFReg64(fd, unop(Iop_F32toF64, getFReg32(fj)));
 
@@ -5938,6 +6466,12 @@ static Bool gen_ftintrm_w_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrm.w.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_s_helper(FTINTRM_W_S, fd, fj);
 }
 
@@ -5949,6 +6483,12 @@ static Bool gen_ftintrm_w_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrm.w.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_s_helper(FTINTRM_W_D, fd, fj);
 }
@@ -5962,6 +6502,12 @@ static Bool gen_ftintrm_l_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrm.l.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_d_helper(FTINTRM_L_S, fd, fj);
 }
 
@@ -5973,6 +6519,12 @@ static Bool gen_ftintrm_l_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrm.l.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_d_helper(FTINTRM_L_D, fd, fj);
 }
@@ -5986,6 +6538,12 @@ static Bool gen_ftintrp_w_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrp.w.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_s_helper(FTINTRP_W_S, fd, fj);
 }
 
@@ -5997,6 +6555,12 @@ static Bool gen_ftintrp_w_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrp.w.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_s_helper(FTINTRP_W_D, fd, fj);
 }
@@ -6010,6 +6574,12 @@ static Bool gen_ftintrp_l_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrp.l.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_d_helper(FTINTRP_L_S, fd, fj);
 }
 
@@ -6021,6 +6591,12 @@ static Bool gen_ftintrp_l_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrp.l.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_d_helper(FTINTRP_L_D, fd, fj);
 }
@@ -6034,6 +6610,12 @@ static Bool gen_ftintrz_w_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrz.w.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_s_helper(FTINTRZ_W_S, fd, fj);
 }
 
@@ -6045,6 +6627,12 @@ static Bool gen_ftintrz_w_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrz.w.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_s_helper(FTINTRZ_W_D, fd, fj);
 }
@@ -6058,6 +6646,12 @@ static Bool gen_ftintrz_l_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrz.l.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_d_helper(FTINTRZ_L_S, fd, fj);
 }
 
@@ -6069,6 +6663,12 @@ static Bool gen_ftintrz_l_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrz.l.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_d_helper(FTINTRZ_L_D, fd, fj);
 }
@@ -6082,6 +6682,12 @@ static Bool gen_ftintrne_w_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrne.w.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_s_helper(FTINTRNE_W_S, fd, fj);
 }
 
@@ -6093,6 +6699,12 @@ static Bool gen_ftintrne_w_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrne.w.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_s_helper(FTINTRNE_W_D, fd, fj);
 }
@@ -6106,6 +6718,12 @@ static Bool gen_ftintrne_l_s ( DisResult* dres, UInt insn,
 
    DIP("ftintrne.l.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_d_helper(FTINTRNE_L_S, fd, fj);
 }
 
@@ -6117,6 +6735,12 @@ static Bool gen_ftintrne_l_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftintrne.l.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_d_helper(FTINTRNE_L_D, fd, fj);
 }
@@ -6130,6 +6754,12 @@ static Bool gen_ftint_w_s ( DisResult* dres, UInt insn,
 
    DIP("ftint.w.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_s_helper(FTINT_W_S, fd, fj);
 }
 
@@ -6141,6 +6771,12 @@ static Bool gen_ftint_w_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ftint.w.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    return gen_convert_s_helper(FTINT_W_D, fd, fj);
 }
@@ -6154,6 +6790,12 @@ static Bool gen_ftint_l_s ( DisResult* dres, UInt insn,
 
    DIP("ftint.l.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_d_helper(FTINT_L_S, fd, fj);
 }
 
@@ -6166,6 +6808,12 @@ static Bool gen_ftint_l_d ( DisResult* dres, UInt insn,
 
    DIP("ftint.l.d %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    return gen_convert_d_helper(FTINT_L_D, fd, fj);
 }
 
@@ -6177,6 +6825,12 @@ static Bool gen_ffint_s_w ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ffint.s.w %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FFINT_S_W, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
@@ -6195,6 +6849,12 @@ static Bool gen_ffint_s_l ( DisResult* dres, UInt insn,
 
    DIP("ffint.s.l %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FFINT_S_L, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
    IRExpr* f = unop(Iop_ReinterpF64asI64, getFReg64(fj));
@@ -6212,6 +6872,12 @@ static Bool gen_ffint_d_w ( DisResult* dres, UInt insn,
 
    DIP("ffint.d.w %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FFINT_D_W, 1, fj, 0, 0);
    IRExpr* f = unop(Iop_ReinterpF32asI32, getFReg32(fj));
    putFReg64(fd, unop(Iop_I32StoF64, f));
@@ -6227,6 +6893,12 @@ static Bool gen_ffint_d_l ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("ffint.d.l %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FFINT_D_L, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
@@ -6245,6 +6917,12 @@ static Bool gen_frint_s ( DisResult* dres, UInt insn,
 
    DIP("frint.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    calculateFCSR(FRINT_S, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
    putFReg32(fd, binop(Iop_RoundF32toInt, rm, getFReg32(fj)));
@@ -6260,6 +6938,12 @@ static Bool gen_frint_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("frint.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    calculateFCSR(FRINT_D, 1, fj, 0, 0);
    IRExpr* rm = get_rounding_mode();
@@ -6282,6 +6966,12 @@ static Bool gen_fmov_s ( DisResult* dres, UInt insn,
 
    DIP("fmov.s %s, %s\n", nameFReg(fd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    putFReg32(fd, getFReg32(fj));
 
    return True;
@@ -6295,6 +6985,12 @@ static Bool gen_fmov_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fmov.d %s, %s\n", nameFReg(fd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    putFReg64(fd, getFReg64(fj));
 
@@ -6312,6 +7008,12 @@ static Bool gen_fsel ( DisResult* dres, UInt insn,
 
    DIP("fsel %s, %s, %s, %s\n", nameFReg(fd), nameFReg(fj),
                                 nameFReg(fk), nameFCC(ca));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* cc = unop(Iop_8Uto64, getFCC(ca));
    IRExpr* cond = binop(Iop_CmpEQ64, cc, mkU64(0));
@@ -6332,6 +7034,12 @@ static Bool gen_movgr2fr_w ( DisResult* dres, UInt insn,
 
    DIP("movgr2fr.w %s, %s\n", nameFReg(fd), nameIReg(rj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    putFReg32(fd, unop(Iop_ReinterpI32asF32, getIReg32(rj)));
 
    return True;
@@ -6346,6 +7054,12 @@ static Bool gen_movgr2fr_d ( DisResult* dres, UInt insn,
 
    DIP("movgr2fr.d %s, %s\n", nameFReg(fd), nameIReg(rj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    putFReg64(fd, unop(Iop_ReinterpI64asF64, getIReg64(rj)));
 
    return True;
@@ -6359,6 +7073,12 @@ static Bool gen_movgr2frh_w ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("movgr2frh.w %s, %s\n", nameFReg(fd), nameIReg(rj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* shr1 = binop(Iop_Shr64, getIReg64(rj), mkU8(32));
    IRExpr* shl1 = binop(Iop_Shl64, shr1, mkU8(32));
@@ -6380,6 +7100,12 @@ static Bool gen_movfr2gr_s ( DisResult* dres, UInt insn,
 
    DIP("movfr2gr.s %s, %s\n", nameIReg(rd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* i = unop(Iop_ReinterpF32asI32, getFReg32(fj));
    putIReg(rd, extendS(Ity_I32, i));
 
@@ -6395,6 +7121,12 @@ static Bool gen_movfr2gr_d ( DisResult* dres, UInt insn,
 
    DIP("movfr2gr.d %s, %s\n", nameIReg(rd), nameFReg(fj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    putIReg(rd, unop(Iop_ReinterpF64asI64, getFReg64(fj)));
 
    return True;
@@ -6408,6 +7140,12 @@ static Bool gen_movfrh2gr_s ( DisResult* dres, UInt insn,
    UInt rd = get_rd(insn);
 
    DIP("movfrh2gr.s %s, %s\n", nameIReg(rd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* i = unop(Iop_ReinterpF64asI64, getFReg64(fj));
    IRExpr* shr = binop(Iop_Shr64, i, mkU8(32));
@@ -6425,6 +7163,12 @@ static Bool gen_movgr2fcsr ( DisResult* dres, UInt insn,
 
    DIP("movgr2fcsr %s, %s\n", nameFCSR(fcsr), nameIReg(rj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    putFCSR(fcsr, getIReg32(rj));
 
    return True;
@@ -6439,6 +7183,12 @@ static Bool gen_movfcsr2gr ( DisResult* dres, UInt insn,
 
    DIP("movfcsr2gr %s, %s\n", nameIReg(rd), nameFCSR(fcsr));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    putIReg(rd, extendS(Ity_I32, getFCSR(fcsr)));
 
    return True;
@@ -6452,6 +7202,12 @@ static Bool gen_movfr2cf ( DisResult* dres, UInt insn,
    UInt cd = get_cd(insn);
 
    DIP("movfr2cf %s, %s\n", nameFCC(cd), nameFReg(fj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* i = unop(Iop_ReinterpF64asI64, getFReg64(fj));
    IRExpr* and = binop(Iop_And64, i, mkU64(0x1));
@@ -6469,6 +7225,12 @@ static Bool gen_movcf2fr ( DisResult* dres, UInt insn,
 
    DIP("movcf2fr %s, %s\n", nameFReg(fd), nameFCC(cj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* cc = unop(Iop_8Uto64, getFCC(cj));
    putFReg64(fd, unop(Iop_ReinterpI64asF64, cc));
 
@@ -6484,6 +7246,12 @@ static Bool gen_movgr2cf ( DisResult* dres, UInt insn,
 
    DIP("movgr2cf %s, %s\n", nameFCC(cd), nameIReg(rj));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* and = binop(Iop_And64, getIReg64(rj), mkU64(0x1));
    putFCC(cd, unop(Iop_64to8, and));
 
@@ -6498,6 +7266,12 @@ static Bool gen_movcf2gr ( DisResult* dres, UInt insn,
    UInt rd = get_rd(insn);
 
    DIP("movcf2gr %s, %s\n", nameIReg(rd), nameFCC(cj));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    putIReg(rd, unop(Iop_8Uto64, getFCC(cj)));
 
@@ -6520,6 +7294,12 @@ static Bool gen_fld_s ( DisResult* dres, UInt insn,
    DIP("fld.s %s, %s, %d\n", nameFReg(fd), nameIReg(rj),
                              (Int)extend32(si12, 12));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), mkU64(extend64(si12, 12)));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
       gen_SIGSEGV(check_align(addr, mkU64(0x3)));
@@ -6538,6 +7318,12 @@ static Bool gen_fst_s ( DisResult* dres, UInt insn,
 
    DIP("fst.s %s, %s, %d\n", nameFReg(fd), nameIReg(rj),
                              (Int)extend32(si12, 12));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), mkU64(extend64(si12, 12)));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
@@ -6558,6 +7344,12 @@ static Bool gen_fld_d ( DisResult* dres, UInt insn,
    DIP("fld.d %s, %s, %d\n", nameFReg(fd), nameIReg(rj),
                              (Int)extend32(si12, 12));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), mkU64(extend64(si12, 12)));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
       gen_SIGSEGV(check_align(addr, mkU64(0x7)));
@@ -6577,6 +7369,12 @@ static Bool gen_fst_d ( DisResult* dres, UInt insn,
    DIP("fst.d %s, %s, %d\n", nameFReg(fd), nameIReg(rj),
                              (Int)extend32(si12, 12));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), mkU64(extend64(si12, 12)));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
       gen_SIGSEGV(check_align(addr, mkU64(0x7)));
@@ -6594,6 +7392,12 @@ static Bool gen_fldx_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fldx.s %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), getIReg64(rk));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
@@ -6613,6 +7417,12 @@ static Bool gen_fldx_d ( DisResult* dres, UInt insn,
 
    DIP("fldx.d %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), getIReg64(rk));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
       gen_SIGSEGV(check_align(addr, mkU64(0x7)));
@@ -6630,6 +7440,12 @@ static Bool gen_fstx_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fstx.s %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), getIReg64(rk));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
@@ -6649,6 +7465,12 @@ static Bool gen_fstx_d ( DisResult* dres, UInt insn,
 
    DIP("fstx.d %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* addr = binop(Iop_Add64, getIReg64(rj), getIReg64(rk));
    if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_UAL))
       gen_SIGSEGV(check_align(addr, mkU64(0x7)));
@@ -6666,6 +7488,12 @@ static Bool gen_fldgt_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fldgt.s %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
@@ -6689,6 +7517,12 @@ static Bool gen_fldgt_d ( DisResult* dres, UInt insn,
 
    DIP("fldgt.d %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
    IRTemp tmp2 = newTemp(Ity_I64);
@@ -6710,6 +7544,12 @@ static Bool gen_fldle_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fldle.s %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
@@ -6733,6 +7573,12 @@ static Bool gen_fldle_d ( DisResult* dres, UInt insn,
 
    DIP("fldle.d %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
    IRTemp tmp2 = newTemp(Ity_I64);
@@ -6754,6 +7600,12 @@ static Bool gen_fstgt_s ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fstgt.s %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
@@ -6777,6 +7629,12 @@ static Bool gen_fstgt_d ( DisResult* dres, UInt insn,
 
    DIP("fstgt.d %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
    IRTemp tmp2 = newTemp(Ity_I64);
@@ -6799,6 +7657,12 @@ static Bool gen_fstle_s ( DisResult* dres, UInt insn,
 
    DIP("fstle.s %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
    IRTemp tmp2 = newTemp(Ity_I64);
@@ -6820,6 +7684,12 @@ static Bool gen_fstle_d ( DisResult* dres, UInt insn,
    UInt fd = get_fd(insn);
 
    DIP("fstle.d %s, %s, %s\n", nameFReg(fd), nameIReg(rj), nameIReg(rk));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRTemp tmp1 = newTemp(Ity_I64);
    assign(tmp1, getIReg64(rj));
@@ -6877,6 +7747,12 @@ static Bool gen_bceqz ( DisResult* dres, UInt insn,
 
    DIP("bceqz %s, %d\n", nameFCC(cj), (Int)extend32(offs21, 21));
 
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
+
    IRExpr* cc = unop(Iop_8Uto64, getFCC(cj));
    IRExpr* cond = binop(Iop_CmpEQ64, cc, mkU64(0));
    exit(cond, Ijk_Boring, extend64(offs21 << 2, 23));
@@ -6892,6 +7768,12 @@ static Bool gen_bcnez ( DisResult* dres, UInt insn,
    UInt cj     = get_cj(insn);
 
    DIP("bcnez %s, %d\n", nameFCC(cj), (Int)extend32(offs21, 21));
+
+   if (!(archinfo->hwcaps & VEX_HWCAPS_LOONGARCH_FP)) {
+      dres->jk_StopHere = Ijk_SigILL;
+      dres->whatNext    = Dis_StopHere;
+      return True;
+   }
 
    IRExpr* cc = unop(Iop_8Uto64, getFCC(cj));
    IRExpr* cond = binop(Iop_CmpNE64, cc, mkU64(0));
