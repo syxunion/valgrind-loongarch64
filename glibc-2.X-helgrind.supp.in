@@ -282,6 +282,30 @@
    fun:pthread_create@*
 }
 
+{
+   helgrind---_dl_lookup_symbol_x
+   Helgrind:Race
+   fun:_dl_lookup_symbol_x
+}
+
+{
+   helgrind---_dl_map_object_deps
+   Helgrind:Race
+   fun:_dl_map_object_deps
+}
+
+{
+   helgrind---_dl_sort_maps_dfs
+   Helgrind:Race
+   fun:_dl_sort_maps_dfs
+}
+
+{
+   helgrind---_dl_fini
+   Helgrind:Race
+   fun:_dl_fini
+}
+
 ####################################################
 # To do with GNU libgomp
 #
